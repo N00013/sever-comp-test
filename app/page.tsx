@@ -1,9 +1,13 @@
 import Image from "next/image"
-import Button from "@/button"
+import Button from "./button"
 
 export default async function Home() {
+  const tickers = ["MSFT", "IBM"]
+  const randomTicker = tickers[Math.floor(Math.random() * tickers.length)]
+
   const res = await fetch(
-    "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&outputsize=full&apikey=demo"
+    `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${randomTicker}&outputsize=full&apikey=demo`,
+    { cache: "no-store" }
   )
   const data = await res.json()
 
